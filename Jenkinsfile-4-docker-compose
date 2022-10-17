@@ -6,7 +6,7 @@ pipeline {
         sh '''
           docker version
           docker info
-          docker-compose -v
+          docker compose -v
           curl --version
           jq --version
         '''
@@ -19,15 +19,15 @@ pipeline {
     }
     stage('Start container') {
       steps {
-        sh 'docker-compose up'
-        sh 'docker-compose ps'
+        sh 'docker compose up'
+        sh 'docker compose ps'
       }
     }
-    stage('Run tests against the container') {
-      steps {
-        sh 'curl http://localhost:3000/param?query=demo | jq'
-      }
-    }
+    // stage('Run tests against the container') {
+    //   steps {
+    //     sh 'curl http://localhost:3000/param?query=demo | jq'
+    //   }
+    // }
   }
   post {
     always {
